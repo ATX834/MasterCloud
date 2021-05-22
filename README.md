@@ -123,7 +123,8 @@ L'application est déployée sur https://tlse-php-2021-march-project-2-group-1.p
 <h2 id='references'> :books: Références </h2>
 
 <p>
-  ➤ Utilisation de l'architecture <a href="https://github.com/WildCodeSchool/simple-mvc">Simple-MVC</a>
+  ➤ <i>Architecture <a href="https://github.com/WildCodeSchool/simple-mvc">Simple-MVC</a></i><br>
+  ➤ <i>API <a href="https://developers.google.com/youtube/iframe_api_reference">Youtube Player</a></i>
 </p>
 
 ##
