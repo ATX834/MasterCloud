@@ -44,7 +44,11 @@
 
 {% endblock %}
 
-
+{% block stylesheet %}
+	<style>
+		body{ overflow-x:hidden;overflow-y:hidden; }
+	</style>
+{% endblock %}
 {% block javascript %}
 <script src="/assets/js/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

@@ -39,7 +39,7 @@
 					</div>
 				{% endif %}
 
-				<div class="col-12 {% if with_sidebar %}col-9 col-lg-10{% endif %} p-0 h-100 d-flex flex-column">
+				<div class="{% if with_sidebar %}col-9 col-lg-10{% else %}col-12 {% endif %} p-0 h-100 d-flex flex-column">
 					<div class="content-block flex-grow-1 mx-4 py-4 px-2">
 						{% block content %}{% endblock %}
 					</div>

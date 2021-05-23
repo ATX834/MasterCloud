@@ -9,8 +9,13 @@ class SearchManager extends AbstractManager
     public function search(string $item): array
     {
         $query = '
-            SELECT t.*, u.nom as utilisateur FROM ' . static::TABLE . ' t 
-            LEFT JOIN utilisateur u ON t.utilisateur_id = u.id 
+            SELECT 
+            t.*, 
+            u.nom as username, 
+            (SELECT COUNT(playlist_id) FROM votes WHERE playlist_id = t.id AND `like` = 1) as likes,
+            (SELECT COUNT(playlist_id) FROM votes WHERE playlist_id = t.id AND `like` = 0) as dislikes 
+            FROM ' . static::TABLE . ' t 
+            LEFT JOIN utilisateur u ON t.utilisateur_id = u.id
             WHERE t.nom LIKE "%' . $item . '%"
         ';
 

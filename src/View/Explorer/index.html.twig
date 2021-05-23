@@ -6,9 +6,15 @@
     <div class="col-12"> 
         <h1>Explorer</h1>
 
-        <div class="row search-result">
-            {% include 'Components/playlist-list.html.twig' with {
-                playlists: playlists
-            }%}
-        </div>
+        {% if searchResults %}
+                {% include 'Components/search-result.html.twig' with {
+                    results: searchResults
+                }%}        
+        {% else %}
+            <div class="row search-result">
+                {% include 'Components/playlist-list.html.twig' with {
+                    playlists: playlists
+                }%}
+            </div>
+        {% endif %}
 {% endblock %}

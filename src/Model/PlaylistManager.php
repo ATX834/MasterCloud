@@ -28,6 +28,24 @@ class PlaylistManager extends AbstractManager
         return $this->pdo->query($query)->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function selectOneById(int $id)
+    {
+        // prepared request
+        $statement = $this->pdo->prepare("
+        SELECT
+            t.*,
+            u.nom as username
+        FROM " . static::TABLE . " t
+        LEFT JOIN utilisateur u ON t.utilisateur_id = u.id
+        WHERE t.id= :id"
+        );
+
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+
+        return $statement->fetch();
+    }
+
     /**
      * Get all row from database.
      */
@@ -151,6 +169,26 @@ class PlaylistManager extends AbstractManager
     {
         $statement = $this->pdo->prepare("UPDATE " . self::TABLE .
         " SET nombre_dislikes = nombre_dislikes + 1 WHERE id = :id");
+
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+
+    public function removeLike(int $id)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE .
+        " SET nombre_likes = nombre_likes - 1 WHERE id = :id");
+
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        return $statement->execute();
+    }
+    
+    public function removeDislike(int $id)
+    {
+        $statement = $this->pdo->prepare("UPDATE " . self::TABLE .
+        " SET nombre_dislikes = nombre_dislikes - 1 WHERE id = :id");
 
         $statement->bindValue(':id', $id, \PDO::PARAM_INT);
 

@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Model\PlaylistManager;
+
 class VoteManager extends AbstractManager
 {
     public const TABLE = 'votes';
@@ -20,8 +22,12 @@ class VoteManager extends AbstractManager
 
     public function vote(array $vote): array
     {
+        $playlistManager = new PlaylistManager();
+
         $userVote = $this->selectByUserAndPlaylist($vote['utilisateur_id'], $vote['playlist_id']);
         $hasVoted = !empty($userVote);
+        
+        $voteHasChanged = $hasVoted ? (bool) $userVote['like'] !== (bool) $vote['like'] : true;
 
         $query = "
             INSERT INTO " . self::TABLE . "
@@ -29,12 +35,33 @@ class VoteManager extends AbstractManager
             (:like, :userId, :playlistId)
         ";
 
+
         if ($hasVoted) {
             $query = "
                 UPDATE " . self::TABLE . " 
                 SET `like` = :like 
                 WHERE utilisateur_id = :userId AND playlist_id = :playlistId
             ";
+            if($voteHasChanged === true)
+            {
+                if($vote['like'] === true)
+                {
+                    $playlistManager->likes((int)$vote['playlist_id']);
+                    $playlistManager->removeDislike((int)$vote['playlist_id']);
+                }
+                else{
+                    $playlistManager->dislikes((int)$vote['playlist_id']);
+                    $playlistManager->removeLike((int)$vote['playlist_id']);
+                }
+            }
+        } else {
+            if($vote['like'] === true)
+            {
+                $playlistManager->likes((int)$vote['playlist_id']);
+            }
+            else {
+                $playlistManager->dislikes((int)$vote['playlist_id']);
+            }
         }
 
         $statement = $this->pdo->prepare($query);
@@ -45,7 +72,7 @@ class VoteManager extends AbstractManager
 
         return [
             'hasVoted' => $hasVoted,
-            'voteHasChanged' => $hasVoted ? (bool) $userVote['like'] !== (bool) $vote['like'] : true,
+            'voteHasChanged' => $voteHasChanged,
         ];
     }
 }
