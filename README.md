@@ -95,9 +95,9 @@
  </p>
  
 <h2 id='deploiement'> :computer: Déploiement </h2>
-
-L'application est déployée sur https://tlse-php-2021-march-project-2-group-1.phprover.wilders.dev
-
+<p>
+    L'application est déployée ici ➤ <a href='http://master-cloud.herokuapp.com/'>master-cloud.herokuapp.com</a>
+</p>
 <h2 id='collaborateurs'> :scroll: Collaborateurs</h2>
 
 <p>
