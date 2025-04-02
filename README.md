@@ -11,11 +11,7 @@
        •
      <img src='https://logos-download.com/wp-content/uploads/2017/07/HTML5_badge.png' width=25px height=25px>
        •
-    <img src='http://dmitri-komarovski.com/img/css3.png' width=25px height=27px>
-       •
     <img src='https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png' width=25px height=25px>
-       •
-    <img src='https://fuzati.com/wp-content/uploads/2016/12/Bootstrap-Logo.png' width=40px height=30px>
        •
     <img src='/readme-src/twig-logo.png' width=58px height=30px>
        •
